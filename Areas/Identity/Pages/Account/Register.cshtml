@@ -1,0 +1,331 @@
+﻿
+
+@page "/Register"
+@model RegisterModel
+
+
+@{
+
+    ViewBag.Title = "Register New Account";
+    ViewBag.Keywords = "Job Seeker Registration, Employer Registration";
+    ViewBag.Description = "Welcome to S M Software Solutions. Searching For Your Perfect New Job? Register With Us And Upload Your Resume.";
+    ViewData["Active"] = "Register";
+}
+
+<section class="slider-area">
+    <div class="login-bg online-cv section-overly pt-100 pb-100 slider-height2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Candidate / Employer SignUp</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="call-to-action mb-10">
+    <div class="wrapper">
+        <div class="container register">
+            <div class="row">
+                <div class="col-md-11 mx-auto regTabs">
+                    <ul class="nav nav-tabs nav-justified mb-50" id="myTab" role="tablist">
+                        <li class="nav-item slide">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Job-Seeker</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Employer</a>
+                        </li>
+                    </ul>
+                    <br /><br /><br />
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="job-form rigester-form" id="seekerform">
+                                <div asp-validation-summary="ModelOnly" class="in-left"></div>
+                                <h3 class="register-heading">Register as a Job-Seeker</h3>
+                                <div class="row register-form">
+
+                                    <div class="col-md-10 mx-auto mt-10">
+                                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input class="inputText" id="signup-firstname" asp-for="Input.FirstName" type="text" placeholder="First Name *" />
+                                            <div class="input-icon"><i class="fas fa-user"></i></div>
+                                        </div>
+                                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input asp-for="Input.LastName" class="inputText" id="signup-lastname" type="text" placeholder="Last Name *">   <div class="input-icon"><i class="fas fa-user"></i></div>                                           
+                                        </div>
+                                         <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input asp-for="Input.Email" class="inputText" id="signup-email" type="email" placeholder="E-mail"><div class="input-icon"><i class="fas fa-envelope"></i></div>
+                                        </div>
+                                        <span asp-validation-for="Input.UserPhone" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input asp-for="Input.UserPhone" class="inputText" id="phone" type="tel" placeholder="+1">
+                                        </div>
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input asp-for="Input.Password" class="inputText" id="signup-password" type="password" placeholder="Password">
+                                            <div class="input-icon"><i class="fas fa-lock"></i></div>
+                                            
+                                        </div>
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input asp-for="Input.ConfirmPassword" class="inputText" id="signup-password" type="password" placeholder="Confirm Password *">
+                                            <div class="input-icon"><i class="fas fa-lock"></i></div>
+                                        </div>
+                                        <span asp-validation-for="Input.ResidencyStatus" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <select asp-for="Input.ResidencyStatus" asp-items="Html.GetEnumSelectList<EnumResidencyStatus>()" class="" data-placeholder="Residency Status" id="select">
+                                            </select>
+                                        </div>
+                                        <span asp-validation-for="Input.Sectors" class="text-danger"></span>
+                                        <div class="input-group input-group-icon mb-30">
+                                            <label>Select One or Multiple Sector</label>
+                                            <select id="sector" asp-for="Input.Sectors" asp-items="Model.Sectors" multiple class="inputText label ui selection fluid dropdown">
+                                            </select>
+                                        </div>
+                                        <div class="captchaDiv mt-20 mb-2">
+                                            <dnt-captcha asp-captcha-generator-max="99999"
+                                                         asp-captcha-generator-min="11111"
+                                                         asp-captcha-generator-language="English"
+                                                         asp-captcha-generator-display-mode="ShowDigits"
+                                                         asp-use-relative-urls="true"
+                                                         asp-placeholder="Enter Captcha"
+                                                         asp-font-name="Trebuchet"
+                                                         asp-font-size="20"
+                                                         asp-fore-color="#333333"
+                                                         asp-back-color="#ccc"
+                                                         asp-text-box-class="text-box inputText"
+                                                         asp-text-box-template="<span class='capt'></span>{0}"
+                                                         asp-validation-error-message="Please enter the security code"
+                                                         asp-validation-message-class="text-danger"
+                                                         asp-refresh-button-class="fas fa-redo btn-sm btn-primary"
+                                                         asp-use-noise="false">
+                                            </dnt-captcha>
+                                        </div>
+                                            <span asp-validation-for="Input.TermsAccepted" class="text-danger"></span>
+                                        <div class="mb-20 tandc text-black-50">
+                                            <input type="checkbox" id="policy" asp-for="Input.TermsAccepted" class="checkbox-inline">
+                                            You agree with the
+                                            "<a href="#" data-toggle="modal" data-target="#privacypolicy">Privacy Policy</a>" and the
+                                            "<a href="#" data-toggle="modal" data-target="#tandc">Terms & Conditions</a>".
+                                            @*The Privacy Policy, Terms and Conditions are on the footer of the Home page.*@
+
+                                        </div>
+                                        <div class="col-md-9 mx-auto">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <button class="theme-btn" type="submit"> Register <i class="fas fa-user-plus"></i></button>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="foot-lnk">
+                                                        <div class="header-btn lgoinregbtn js-signin-modal-trigger">
+                                                            <p>
+                                                                Already have an account? <a class="theme-btn cd-main-nav__item--signin" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="job-form rigester-form" id="employerform">
+                                <div asp-validation-summary="ModelOnly" class="in-left"></div>
+                                <h3 class="register-heading">Register as an Employer</h3>
+                                <div class="row register-form">
+                                    <div class="col-md-10 mx-auto">
+                                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input class="inputText" id="signup-firstname" asp-for="Input.FirstName" type="text" placeholder="First Name *" />
+                                            <div class="input-icon"><i class="fas fa-user"></i></div>
+                                        </div>
+                                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input asp-for="Input.LastName" class="inputText" id="signup-lastname" type="text" placeholder="Last Name *">   <div class="input-icon"><i class="fas fa-user"></i></div> 
+                                        </div>
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input asp-for="Input.Email" class="inputText" id="signup-email" type="email" placeholder="E-mail"><div class="input-icon"><i class="fas fa-envelope"></i></div>
+                                            
+                                        </div>
+                                        <span asp-validation-for="Input.UserPhone" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input asp-for="Input.UserPhone" class="inputText" id="phone1" type="tel" placeholder="+1">
+                                            
+                                        </div>
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input asp-for="Input.Password" class="inputText" id="signup-password" type="password" placeholder="Password">
+                                            <div class="input-icon"><i class="fas fa-lock"></i></div>
+                                            
+                                        </div>
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input asp-for="Input.ConfirmPassword" class="inputText" id="signup-password" type="password" placeholder="Confirm Password *">
+                                            <div class="input-icon"><i class="fas fa-lock"></i></div>
+                                            
+                                        </div>
+                                        <span id="orgmsg" asp-validation-for="Input.OrganizationName" class="text-danger"></span>
+                                        <div class="input-group input-group-icon">
+                                            <input asp-for="Input.OrganizationName" class="inputText" id="organ" type="text" required placeholder="Organization Name *">
+                                            <div class="input-icon"><i class="fas fa-building"></i></div>
+                                            
+                                        </div>
+                                        <div class="captchaDiv mt-30 mb-2">
+                                            <dnt-captcha asp-captcha-generator-max="99999"
+                                                         asp-captcha-generator-min="11111"
+                                                         asp-captcha-generator-language="English"
+                                                         asp-captcha-generator-display-mode="ShowDigits"
+                                                         asp-use-relative-urls="true"
+                                                         asp-placeholder="Enter Captcha *"
+                                                         asp-font-name="Trebuchet"
+                                                         asp-font-size="20"
+                                                         asp-fore-color="#333333"
+                                                         asp-back-color="#ccc"
+                                                         asp-text-box-class="text-box inputText"
+                                                         asp-text-box-template="<span class='capt'></span>{0}"
+                                                         asp-validation-error-message="Please enter the security code"
+                                                         asp-validation-message-class="text-danger"
+                                                         asp-refresh-button-class="fas fa-redo btn-sm btn-primary"
+                                                         asp-use-noise="false">
+                                            </dnt-captcha>
+                                        </div>
+                                        <span asp-validation-for="Input.TermsAccepted" class="text-danger"></span>
+                                        <div class="mb-20 tandc text-black-50">
+                                            <input type="checkbox" id="policy" asp-for="Input.TermsAccepted" class="checkbox-inline">
+                                            You agree with the
+                                            "<a href="#" data-toggle="modal" data-target="#privacypolicy">Privacy Policy</a>" and the
+                                            "<a href="#" data-toggle="modal" data-target="#tandc">Terms & Conditions</a>".
+                                            @*The Privacy Policy, Terms and Conditions are on the footer of the Home page.*@
+
+                                            
+                                        </div>
+                                        <div class="col-md-9 mx-auto">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <button class="theme-btn" type="submit"> Register <i class="fas fa-user-plus"></i></button>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="foot-lnk">
+                                                        <div class="header-btn lgoinregbtn js-signin-modal-trigger">
+                                                            <p>
+                                                                Already have an account? <a class="theme-btn cd-main-nav__item--signin" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-sl-10 col-lg-10 col-md-10 mx-auto">
+            <section>
+                @*<h4>Use another service to register.</h4>*@
+                <hr />
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
+                        @*<div>
+                                <p>
+                                    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                    for details on setting up this ASP.NET application to support logging in via external services.
+                                </p>
+                            </div>*@
+                    }
+                    else
+                    {
+
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
+                }
+            </section>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        (function ($) {
+
+            "use strict";
+            $('.label.ui.dropdown')
+                .dropdown({ maxSelections: 5 });
+            $('.no.label.ui.dropdown')
+                .dropdown({
+                    useLabels: false
+                });
+            $('.ui.button').on('click', function () {
+                $('.ui.dropdown')
+                    .dropdown('restore defaults')
+            });
+        })(jQuery);
+    </script>
+
+    <script type="text/javascript">
+
+
+
+
+        // extend jquery range validator to work for required checkboxes
+        var defaultRangeValidator = $.validator.methods.range;
+        $.validator.methods.range = function (value, element, param) {
+            if (element.type === 'checkbox') {
+                // if it's a checkbox return true if it is checked
+                return element.checked;
+            } else {
+                // otherwise run the default validation function
+                return defaultRangeValidator.call(this, value, element, param);
+            }
+        }
+    </script>
+
+    <script>
+        $("a.nav-link").on('click', function (e) {
+            if ($(this).attr("id") === "home-tab") {
+                clearForm($("#employerform"))
+            };
+            if ($(this).attr("id") === "profile-tab") {
+                clearForm($("#seekerform"))
+            };
+
+            function clearForm($form) {
+                $form.find(':input[type=text]').val('');
+
+            }
+
+        });
+    </script>
+
+
+}

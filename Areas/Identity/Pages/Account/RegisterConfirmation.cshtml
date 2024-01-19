@@ -1,0 +1,58 @@
+﻿@page "/Registration-Confirmation"
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Registration Confirmation";
+}
+
+
+<section class="slider-area">
+    <div class="login-bg online-cv section-overly pt-100 pb-100 slider-height2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Registration Confirmation</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="call-to-action mt-50 mb-50">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-9 col-lg-9 col-md-9 mx-auto">
+                <div class="container form-contents-areas">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-9 col-md-9 mx-auto">
+                            <h4>@ViewData["Title"]</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-12 col-lg-9 mx-auto">
+                        @{ if (@Model.DisplayConfirmAccountLink)
+                            {
+                                <p>
+                                    This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
+                                    Normally this would be emailed: <a class="theme-btn btn-sm" id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
+                                </p>
+                            }
+                            else
+                            {
+                                <p>
+                                    Please check your email to confirm your account.
+                                </p>
+                                <p>
+                                    If you still haven't received it, please check your spam and/or junk folder. Sometimes the confirmation emails get misdirected.
+                                </p>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

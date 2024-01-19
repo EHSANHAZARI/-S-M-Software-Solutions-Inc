@@ -1,0 +1,116 @@
+﻿@page "/Login"
+@model LoginModel
+
+
+@{
+    ViewBag.Title = "Login to Your Account";
+    ViewBag.Keywords = "Job Search, Job Listing";
+    ViewBag.Description = "Welcome to S M Software Solutions. Login to access your profile to search for the latest available jobs and find your next potential Company. ";
+    ViewData["Active"] = "Login";
+}
+
+
+<section class="slider-area">
+    <div class="login-bg online-cv section-overly pt-100 pb-100 slider-height2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Login</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="call-to-action mt-50 mb-50">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-6 col-lg-7 col-md-9 mx-auto">
+                <div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">@ViewData["Title"]</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="login-wrap">
+                            <form method="post" class="cd-signin-modal__form">
+                                <p class="cd-signin-modal__fieldset">
+                                    <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signin-email">E-mail</label>
+                                    <input asp-for="Input.Email" class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-email" type="email" placeholder="Your Email">
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </p>
+                                <p class="cd-signin-modal__fieldset">
+                                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signin-password">Password</label>
+                                    <input asp-for="Input.Password" class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-password" type="password" placeholder="Password">
+                                    <i id="show-password" class="far fa-eye-slash"></i>
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </p>
+                                <p class="cd-signin-modal__fieldset">
+                                    <input asp-for="Input.RememberMe" type="checkbox" id="remember-me" checked class="cd-signin-modal__input ">
+                                    <label asp-for="Input.RememberMe" for="remember-me">@Html.DisplayNameFor(m => m.Input.RememberMe)</label>
+                                </p>
+                                <p class="cd-signin-modal__fieldset">
+                                    <button type="submit" class="theme-btn">
+                                        Login <i class="fas fa-sign-in-alt"></i>
+                                    </button>
+                                </p>
+                                <div class="foot-lnk">
+                                    <div class="header-btn  js-signin-modal-trigger">
+                                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot Your Password?</a> |
+                                        <a class="theme-btn cd-main-nav__item--signup" asp-area="Identity" asp-page="/Account/Register" data-signin="signup">Sign Up</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sl-10 col-lg-10 col-md-10 mx-auto">
+                <section>
+                    @*<h4>Use another service to log in.</h4>*@
+
+                    @{ if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                        { @*<div>
+                                    <p>
+                                        There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                        for details on setting up this ASP.NET application to support logging in via external services.
+                                    </p>
+                                </div>*@ }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="theme-btn" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>}
+                                </p>
+                            </div>
+                        </form> } }
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(function () {
+            $('#show-password').click(function () {
+                $(this).toggleClass('fa-eye-slash fa-eye');
+                if ('password' == $('#signin-password').attr('type')) {
+                    $('#signin-password').prop('type', 'text');
+                } else {
+                    $('#signin-password').prop('type', 'password');
+                }
+            });
+        });
+    </script>
+
+}

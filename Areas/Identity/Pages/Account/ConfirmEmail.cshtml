@@ -1,0 +1,42 @@
+﻿@page "/Confirm-Email"
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "Email Confirmation";
+}
+
+<section class="slider-area">
+    <div class="login-bg online-cv section-overly pt-100 pb-100 slider-height2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Confirm Your Email?</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="call-to-action mt-50 mb-50">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-9 col-lg-9 col-md-9 mx-auto">
+                <div class="container form-contents-areas">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-9 col-md-9 mx-auto">
+                            <h4 class="" id="myModalLabel">@ViewData["Title"]</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-12 col-lg-9 mx-auto">
+                        <p>
+                            Thank you for confirming your email with SMSS! We need a little more information to complete your profile.
+                            <br />
+                            <a class="theme-btn btn-sm" asp-page="./Login"> Click Here To Login <i class="fas fa-sign-in-alt"></i></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
